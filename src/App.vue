@@ -1,47 +1,26 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <v-container>
+    <h4>アイコンの表示</h4>
+    <v-row>
+      <v-col>
+        <p><v-icon icon="mdi-home" /> Home</p>
+        <p><v-icon icon="mdi-account" /> Account</p>
+      </v-col>
+    </v-row>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <h4>カウンターボタン</h4>
+    <v-row>
+      <v-col>
+        <v-btn
+          variant="outlined"
+          @click="count++"
+        >count : <v-icon icon="mdi-plus"/>{{ count }}</v-btn>
+      </v-col>
+    </v-row>    
+  </v-container>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<script setup>
+import { ref } from 'vue';
+const count = ref(0);
+</script>
