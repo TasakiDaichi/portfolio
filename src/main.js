@@ -7,6 +7,7 @@ import { createVuetify } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import Profile from './components/profile.vue'
 
 // Components
 import App from './App.vue'
@@ -22,5 +23,7 @@ const vuetify = createVuetify({
     }, 
   }, 
 }) 
-
-createApp(App).use(vuetify).mount('#app') 
+const app = createApp(App)
+app.component('Profile', Profile);
+app.use(vuetify)
+app.mount('#app') 
