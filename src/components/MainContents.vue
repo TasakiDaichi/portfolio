@@ -37,7 +37,7 @@
     </v-container>
     <v-footer class="d-flex align-center justify-center ga-2 flex-wrap flex-grow-1 py-3" color="surface-light">
       <p>2025 DaichiTasaki</p>
-      <v-btn density="compact" icon="mdi-github"></v-btn>
+      <v-btn density="compact" icon="mdi-github" href="https://github.com/TasakiDaichi"></v-btn>
     </v-footer>
   </v-main>
 </template>
