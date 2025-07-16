@@ -1,5 +1,15 @@
-@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
+/* 基本のスタイルリセットとダークテーマの背景 */
+body {
+  background-color: #121212; /* ダークテーマの背景色 */
+  color: #E0E0E0; /* 明るいグレーのテキスト */
+  font-family: 'Inter', sans-serif; /* モダンなフォント */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 全体のレイアウト調整 */
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -7,20 +17,31 @@
   font-weight: normal;
 }
 
+/* ガラスモーフィズムを適用するカードの基本スタイル */
+.v-card {
+  background: rgba(255, 255, 255, 0.1) !important; /* 半透明の白 */
+  backdrop-filter: blur(10px) !important; /* 背景をぼかす */
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important; /* 明るい境界線 */
+  border-radius: 16px !important; /* 角を丸く */
+}
+
+/* リンクのスタイル調整 */
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: #42b883; /* Vue Green */
   transition: 0.4s;
   padding: 3px;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    background-color: rgba(66, 184, 131, 0.2);
   }
 }
 
+/* レスポンシブ対応 */
 @media (min-width: 1024px) {
   body {
     display: flex;
@@ -29,7 +50,8 @@ a,
 
   #app {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr; /* サイドバーとメインコンテンツの比率 */
     padding: 0 2rem;
+    gap: 2rem; /* グリッド間の余白 */
   }
 }

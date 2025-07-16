@@ -15,6 +15,9 @@ import App from './App.vue'
 const vuetify = createVuetify({ 
   components, 
   directives, 
+  theme: {
+    defaultTheme: 'dark'
+  },
   icons: { 
     defaultSet: 'mdi', 
     aliases, 
