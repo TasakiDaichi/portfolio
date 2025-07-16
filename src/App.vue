@@ -1,136 +1,145 @@
 <template>
   <v-app>
-    <!-- ナビゲーションバー -->
-    <v-app-bar app>
-      <v-toolbar-title>portfolio</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn text href="#about">自己紹介</v-btn>
-      <v-btn text href="#skills">スキル</v-btn>
-      <v-btn text href="#projects">プロジェクト</v-btn>
-      <v-btn text href="#contact">コンタクト</v-btn>
-    </v-app-bar>
-
-    <!-- メインコンテンツ -->
-    <v-main>
-      <v-container>
-        <!-- トップセクション -->
-        <section id="home" class="home">
-          <div>
-            <h1>Tasaki Daichi</h1>
-            <p>駆け出しWEBエンジニア</p>
-            <v-btn color="primary" href="#projects">プロジェクトを見る</v-btn>
+    <div>
+      <!-- ローディング画面 -->
+      <transition name="fade-out">
+        <div v-if="loading" class="loading-screen">
+          <!-- 波紋背景 -->
+          <div class="ripple-background">
+            <div class="circle xxlarge shade1"></div>
+            <div class="circle xlarge shade2"></div>
+            <div class="circle large shade3"></div>
+            <div class="circle medium shade4"></div>
+            <div class="circle small shade5"></div>
           </div>
-        </section>
 
-        <!-- 自己紹介セクション -->
-        <section id="about" class="about">
-          <Profile />
-        </section>
+          <!-- プログレスバー -->
+          <div class="progress-wrapper">
+            <div class="loading-bar" :style="{ width: progress + '%' }"></div>
+            <div class="loading-text">{{ progress }}%</div>
+          </div>
+        </div>
+      </transition>
 
-        <!-- スキルセクション -->
-        <section id="skills" class="skills">
-          <v-row>
-            <v-col cols="12" md="6">
-              <h2>スキル</h2>
-              <v-list>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title>python</v-list-item-title>
-                    <v-list-item-subtitle>主に研究・バックエンド開発(AWS lambda)で使用しています。</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title>JavaScript</v-list-item-title>
-                    <v-list-item-subtitle>フロントエンド開発で使用しています。</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title>Vue.js</v-list-item-title>
-                    <v-list-item-subtitle>コンポーネント指向でのフロント開発に取り組んでいます。</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title>C#（現在使用なし）</v-list-item-title>
-                    <v-list-item-subtitle>Unityでの個人ゲーム開発を行っていました。</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-col>
-          </v-row>
-        </section>
-
-        <!-- プロジェクトセクション -->
-        <section id="projects" class="projects">
-          <v-row>
-            <v-col cols="12">
-              <h2>プロジェクト</h2>
-              <v-row>
-                <v-col cols="12" md="4" v-for="project in projects" :key="project.id">
-                  <v-card>
-                    <v-card-title>{{ project.name }}</v-card-title>
-                    <v-card-subtitle>{{ project.description }}</v-card-subtitle>
-                    <v-card-actions>
-                      <v-btn color="primary" :href="project.link" target="_blank">プロジェクトを見る</v-btn>
-                      <v-btn v-if="project.movieLink" color="primary" :href="project.movieLink" target="_blank">動画を見る</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </section>
-
-        <!-- お問い合わせセクション -->
-        <section id="contact" class="contact">
-          <v-row>
-            <v-col cols="12">
-              <h2>コンタクト</h2>
-              <p>
-                ご興味がありましたら、以下の方法でご連絡ください。
-              </p>
-              <v-btn color="primary" href="mailto:d.tasaki1212@icloud.com">Emailで連絡</v-btn>
-            </v-col>
-          </v-row>
-        </section>
-      </v-container>
-    </v-main>
-
-    <WelcomeItem />
-
-    <!-- フッター -->
-    <v-footer app>
-      <span>© 2025 TasakiDaichi</span>
-    </v-footer>
+      <!-- 本体表示 -->
+      <transition name="fade">
+        <div v-if="!loading">
+          <MainContents />
+        </div>
+      </transition>
+    </div>
   </v-app>
 </template>
 
-<script>
-import {ref} from 'vue';
+<script setup>
+import { ref, onMounted } from 'vue'
+import MainContents from './components/MainContents.vue'
 
-const projects = [
-  { id: 1, name: '個人ゲーム開発（ホラー）', description: '初めてのUnityにてホラーゲームを開発しました。DarkDeceptionっぽいゲームです。', link: 'https://github.com/yourusername/portfolio', movieLink: '' },
-  { id: 2, name: '個人ゲーム開発（アドベンチャー）', description: 'Ardinoを使用した、身体の動きを感知してアバターが動くゲームです。', link: 'https://github.com/yourusername/portfolio', movieLink: '' },
-  { id: 3, name: 'ポートフォリオサイト', description: 'Vue.jsを使ったこのポートフォリオです。', link: 'https://github.com/yourusername/portfolio', movieLink: '' },
-  { id: 4, name: 'BazzWordシミュレータ', description: 'pygameとFlaskを用いた流行語遷移を簡易的にシミュレーションできるシステムです。', link: 'https://github.com/yourusername/portfolio', movieLink: '' }
-]
+const loading = ref(true)
+const progress = ref(0)
+
+onMounted(() => {
+  const interval = setInterval(() => {
+    if (progress.value >= 100) {
+      clearInterval(interval)
+      setTimeout(() => {
+        loading.value = false
+      }, 600)
+    } else {
+      progress.value += 1
+    }
+  }, 30)
+})
 </script>
 
 <style scoped>
-.home {
-  text-align: center;
-  padding: 50px 0;
+/* 背景全体 */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #121212; /* main.cssと合わせた背景色 */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
 }
 
-.about, .skills, .projects, .contact {
-  padding: 50px 0;
+/* 波紋エフェクト */
+.ripple-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-footer {
+.circle {
+  border-radius: 50%;
+  position: absolute;
+  animation: ripple 3s infinite ease-in-out;
+}
+
+.xxlarge { width: 600px; height: 600px; }
+.xlarge  { width: 400px; height: 400px; }
+.large   { width: 300px; height: 300px; }
+.medium  { width: 200px; height: 200px; }
+.small   { width: 100px; height: 100px; }
+
+/* アクセントカラーに合わせた波紋 */
+.shade1 { background-color: rgba(66, 184, 131, 0.03); }
+.shade2 { background-color: rgba(66, 184, 131, 0.04); }
+.shade3 { background-color: rgba(66, 184, 131, 0.05); }
+.shade4 { background-color: rgba(66, 184, 131, 0.06); }
+.shade5 { background-color: rgba(66, 184, 131, 0.08); }
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* プログレスバー */
+.progress-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 50%;
   text-align: center;
-  background-color: #f5f5f5;
-  padding: 10px 0;
+}
+
+.loading-bar {
+  height: 10px;
+  background-color: #42b883; /* Vue Green */
+  transition: width 0.2s ease;
+  border-radius: 5px;
+}
+
+.loading-text {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #E0E0E0;
+  font-family: 'Inter', monospace;
+}
+
+/* フェード遷移 */
+.fade-enter-active,
+.fade-leave-active,
+.fade-out-leave-active {
+  transition: opacity 0.8s ease;
+}
+.fade-enter-from,
+.fade-leave-to,
+.fade-out-leave-to {
+  opacity: 0;
 }
 </style>
