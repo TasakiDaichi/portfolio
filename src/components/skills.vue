@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>スキル</h2>
+    <h2>SKILL</h2>
     <v-container fluid>
       <v-row>
         <v-col
@@ -47,7 +47,7 @@ const skills = ref([
     color: 'yellow',
     description: '主に研究・バックエンド開発(AWS Lambda)で使用しています。',
     progress: 0,
-    targetProgress: 80,
+    targetProgress: 75,
   },
   {
     name: 'JavaScript',
@@ -55,7 +55,7 @@ const skills = ref([
     color: 'orange',
     description: 'フロントエンド開発で使用しています。',
     progress: 0,
-    targetProgress: 60,
+    targetProgress: 50,
   },
   {
     name: 'Vue.js',
@@ -63,15 +63,15 @@ const skills = ref([
     color: 'green',
     description: 'コンポーネント指向でのフロント開発に取り組んでいます。',
     progress: 0,
-    targetProgress: 60,
+    targetProgress: 50,
   },
   {
-    name: 'C#（現在使用なし）',
+    name: 'C#',
     icon: 'mdi-language-csharp',
     color: 'purple',
-    description: 'Unityでの個人ゲーム開発を行っていました。',
+    description: 'Unityでの個人ゲーム開発を行っていました。作成したゲームはプロジェクトから確認できます。',
     progress: 0,
-    targetProgress: 40,
+    targetProgress: 20,
   },
   {
     name: 'AWS',
@@ -79,7 +79,15 @@ const skills = ref([
     color: 'blue',
     description: 'Cloudfront+S3を用いた静的サイト配信とAPIGateWay, Lambdaを用いたサーバレスバックエンドを持つ、モダンなウェブアプリケーションを構成しています。',
     progress: 0,
-    targetProgress: 40
+    targetProgress: 30
+  },
+  {
+    name: 'データベース関連',
+    icon: 'mdi-database',
+    color: 'red',
+    description: 'リレーショナルDBの設計やMySQLでの操作を行っています。sqlの基本文法を習得したため、現在、複雑な操作ができるように勉強を進めています。',
+    progress: 0,
+    targetProgress: 35
   }
 ]);
 
@@ -97,7 +105,7 @@ onMounted(() => {
   const options = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.2, // カードが20%見えたら発火
+    threshold: 0.2, // カード発火のタイミング
   };
 
   observer = new IntersectionObserver((entries) => {

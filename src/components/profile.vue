@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="text-h4 font-weight-bold mb-4">Profile</h2>
+        <h2 class="text-h4 font-weight-bold mb-4">PROFILE</h2>
         <div class="buttons mb-6">
             <v-btn variant="outlined" color="primary" @click="profilehandler = 'profile'">
                 <v-icon left>mdi-account</v-icon>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="profile-content">
                                     <div class="years">
-                                        <p>2021年3月</p>
+                                        <p>2022年4月</p>
                                         <p>筑波大学理工学群工学システム学類　移行</p>
                                     </div>
                                     <div class="content">
@@ -189,7 +189,7 @@ const profilehandler = ref('profile')
 <style scoped>
 .buttons {
   display: flex;
-  flex-wrap: wrap; /* for smaller screens */
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 24px;
 }

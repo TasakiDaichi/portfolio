@@ -2,7 +2,7 @@
   <section id="projects" class="projects">
     <v-row>
       <v-col cols="12">
-        <h2>プロジェクト</h2>
+        <h2>PROJECT</h2>
         <v-row>
           <v-col cols="12" md="6" v-for="project in projects" :key="project.id">
             <v-card class="project-card" :ref="setProjectCardRef">
@@ -50,7 +50,7 @@ const projects = [
   {
     id: 4,
     name: 'BazzWordシミュレータ',
-    description: 'pygameとFlaskを用いた流行語遷移を簡易的にシミュレーションできるシステムです。',
+    description: 'pygameとFlaskを用いた流行語遷移シミュレーターです。',
     link: 'https://github.com/TasakiDaichi/bazzword_simulater',
     movieLink: ''
   },

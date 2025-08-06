@@ -33,13 +33,15 @@
       </section>
 
       <!-- プロジェクトセクション -->
-      <Project />
-
+      <section id="projects" class="projects">
+        <Project />
+      </section>
+      
       <!-- お問い合わせセクション -->
       <section id="contact" class="contact">
         <v-row>
           <v-col cols="12">
-            <h2>コンタクト</h2>
+            <h2>CONTACT</h2>
             <p>
               ご興味がありましたら、こちらのメールアドレスにご連絡ください
             </p>
